@@ -22,94 +22,62 @@ def retornaPrioridade(mensagem):
     for field1, field2 in readerTeste:
         baseTeste.append((field1, field2))
 
-    #for (palavras, prioridade) in baseTeste:
-    #    print(palavras)
-
-    stopwordsnltk = nltk.corpus.stopwords.words('portuguese')
+    stopwordsNltk = nltk.corpus.stopwords.words('portuguese')
 
     # Técnica para retirar as partes inúteis das palavras, deixando apenas seus radicais.
     # Ex.: para Amor, Amado e Amável o radical é Am. Para o algoritmo as 3 palavras seriam tratadas como uma só,
     # fazendo com que o algoritmo seja mais dinâmico e menos carregado.
-    def aplicastemmer(texto):
+    def aplicaStemmer(texto):
      stemmer = nltk.stem.RSLPStemmer()
-     frasessstemming = []
+     frasesStemming = []
      for (palavras, prioridade) in texto:
         #aplica o stemmer as palavres que não estão dentre as stopwords
-        comstemming = [str(stemmer.stem(p.decode('utf-8'))) for p in palavras.split() if p not in stopwordsnltk]
-        frasessstemming.append((comstemming, prioridade))
-     return frasessstemming
+        comStemming = [str(stemmer.stem(p.decode('utf-8'))) for p in palavras.split() if p not in stopwordsNltk]
+        frasesStemming.append((comStemming, prioridade))
+     return frasesStemming
 
     #Aplica o stemmer nas frases de treinamento
-    frasescomstemmingtreinamento = aplicastemmer(baseTreino)
+    frasesStemmingTreino = aplicaStemmer(baseTreino)
     #Aplica o stemmer nas frases de teste
-    frasescomstemmingteste = aplicastemmer(baseTeste)
+    frasesStemmingTeste = aplicaStemmer(baseTeste)
 
-    #junta todas as palavras em uma lista de palavras
-    def buscapalavras(frases):
-     todaspalavras = []
-     for (palavras, prioridade) in frases:
-        todaspalavras.extend(palavras)
-     return todaspalavras
+    # junta todas as palavras em uma lista de palavras
+    def buscaPalavras(frases):
+        todasPalavras = []
+        for (palavras, prioridade) in frases:
+            todasPalavras.extend(palavras)
+        return todasPalavras
 
     #busca todas as palavras de treinamento
-    palavrastreinamento = buscapalavras(frasescomstemmingtreinamento)
-    #busca todas as palavras de teste
-    palavrasteste = buscapalavras(frasescomstemmingteste)
-
-    #Busca a frequencia de cada palavra na lista de palavras passada por parâmetro
-    def buscafrequencia(palavras):
-     palavras = nltk.FreqDist(palavras)
-     return palavras
-
-    #Busca a frequencia das palavras de treinamento
-    frequenciatreinamento = buscafrequencia(palavrastreinamento)
-    #Busca a frequencia das palavras de testes
-    frequenciateste = buscafrequencia(palavrasteste)
+    palavrasTreino = buscaPalavras(frasesStemmingTreino)
 
     #Extrai palavras não dublicadas (a ver)
-    def extratorpalavras(documento):
-     #utilização do set para remover as palavras dublicadas na lista
-     doc = set(documento)
-     caracteristicas = {}
-     for palavras in palavrastreinamento:
-        caracteristicas['%s' % palavras] = (palavras in doc)
-     return caracteristicas
+    def extratorPalavras(documento):
+        #utilização do set para remover as palavras dublicadas na lista
+        doc = set(documento)
+        caracteristicas = {}
+        for palavras in palavrasTreino:
+            caracteristicas['%s' % palavras] = (palavras in doc)
+        return caracteristicas
 
-    caracteristicasfrase = extratorpalavras(['am', 'nov', 'dia'])
-    basecompletatreinamento = nltk.classify.apply_features(extratorpalavras, frasescomstemmingtreinamento)
-    basecompletateste = nltk.classify.apply_features(extratorpalavras, frasescomstemmingteste)
+    baseCompletaTreino = nltk.classify.apply_features(extratorPalavras, frasesStemmingTreino)
+    baseCompletaTeste = nltk.classify.apply_features(extratorPalavras, frasesStemmingTeste)
 
-    classificador = nltk.NaiveBayesClassifier.train(basecompletatreinamento)
-    #print(classificador.labels())
-
-    #print(nltk.classify.accuracy(classificador, basecompletateste))
+    classificador = nltk.NaiveBayesClassifier.train(baseCompletaTreino)
 
     erros = []
-    for (frase, classe) in basecompletateste:
-
+    for (frase, classe) in baseCompletaTeste:
         resultado = classificador.classify(frase)
         if resultado != classe:
             erros.append((classe, resultado, frase))
-    from nltk.metrics import ConfusionMatrix
-
-    #esperado = []
-    #previsto = []
-    #for (frase, classe) in basecompletateste:
-    #    resultado = classificador.classify(frase)
-    #    previsto.append(resultado)
-    #    esperado.append(classe)
-    #matriz = ConfusionMatrix(esperado, previsto)
-    #print(matriz)
 
     teste = mensagem
-    testestemming = []
+    testeStemming = []
     stemmer = nltk.stem.RSLPStemmer()
-    for (palavrastreinamento) in teste.split():
-     comstem = [p for p in palavrastreinamento.split()]
-     testestemming.append(str(stemmer.stem(comstem[0].decode('utf-8'))))
+    for (palavrasTreino) in teste.split():
+     comStemmer = [p for p in palavrasTreino.split()]
+     testeStemming.append(str(stemmer.stem(comStemmer[0].decode('utf-8'))))
 
-    novo = extratorpalavras(testestemming)
-    distribuicao = classificador.prob_classify(novo)
-    #print("RESULTADO:")
-    #print(classificador.classify(novo))
+    novo = extratorPalavras(testeStemming)
+
     return classificador.classify(novo)
