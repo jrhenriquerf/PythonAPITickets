@@ -26,7 +26,7 @@
         "Subject": "RE: Sem Assunto"
       }
     ], 
-    "Priority": "Alta", 
+    "Priority": "Normal", 
     "TicketID": 28890
   }, 
   {
@@ -50,6 +50,7 @@
         "Subject": "RE: Reclama\u00e7\u00e3o"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28891
   }, 
   {
@@ -73,6 +74,7 @@
         "Subject": "RE: Tamanho diferente"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28892
   }, 
   {
@@ -102,6 +104,7 @@
         "Subject": "RE: D\u00favidas"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 28893
   }, 
   {
@@ -125,6 +128,7 @@
         "Subject": "RE: Reclama\u00e7\u00e3o"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28894
   }, 
   {
@@ -148,6 +152,7 @@
         "Subject": "RE: Entrega"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28895
   }, 
   {
@@ -171,6 +176,7 @@
         "Subject": "RE: Elogios"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28896
   }, 
   {
@@ -194,6 +200,7 @@
         "Subject": "RE: Elogios e Sugest\u00f5es"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28897
   }, 
   {
@@ -217,6 +224,7 @@
         "Subject": "RE: Elogios"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 28898
   }, 
   {
@@ -240,6 +248,7 @@
         "Subject": "RE: D\u00favida"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 28899
   }, 
   {
@@ -263,6 +272,7 @@
         "Subject": "RE: Planos e Formas de Pagamento"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288910
   }, 
   {
@@ -292,6 +302,7 @@
         "Subject": "RE: COnfirma\u00e7\u00e3o de data de entrega"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288911
   }, 
   {
@@ -321,6 +332,7 @@
         "Subject": "RE: D\u00favidas sobre o programa"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288912
   }, 
   {
@@ -350,6 +362,7 @@
         "Subject": "RE: Como troco um produto?"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288913
   }, 
   {
@@ -379,6 +392,7 @@
         "Subject": "RE: D\u00favidas sobre cancelamento do programa"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288914
   }, 
   {
@@ -408,6 +422,7 @@
         "Subject": "RE: Informa\u00e7\u00e3o"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288915
   }, 
   {
@@ -437,6 +452,7 @@
         "Subject": "RE: Cadastro"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288916
   }, 
   {
@@ -460,6 +476,7 @@
         "Subject": "RE: Data de Entrega"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288917
   }, 
   {
@@ -489,6 +506,7 @@
         "Subject": "RE: Coleta de Pedido"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288918
   }, 
   {
@@ -512,6 +530,7 @@
         "Subject": "RE: troca de produto"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288919
   }, 
   {
@@ -535,6 +554,7 @@
         "Subject": "RE: Entrega "
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288920
   }, 
   {
@@ -558,6 +578,7 @@
         "Subject": "RE: Formas de Pagamento"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288921
   }, 
   {
@@ -581,6 +602,7 @@
         "Subject": "RE: Esclarecer uma d\u00favida"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288922
   }, 
   {
@@ -604,6 +626,7 @@
         "Subject": "RE: Como est\u00e1 meu pedido?"
       }
     ], 
+    "Priority": "Normal", 
     "TicketID": 288923
   }, 
   {
@@ -633,6 +656,7 @@
         "Subject": "RE: Acompanhamento"
       }
     ], 
+    "Priority": "Alta", 
     "TicketID": 288924
   }
 ]

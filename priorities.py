@@ -6,19 +6,28 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 def retornaPrioridade(mensagem):
+    #tipo='CORPO'
     baseTreino = []
     baseTeste = []
+
+    #if tipo == 'ASSUNTO':
+    #    fileTreino = 'dadosTreinoAssuntos.csv'
+    #    fileTeste = 'dadosTesteAssuntos.csv'
+    #else:
+    fileTreino = 'dadosTreino.csv'
+    fileTeste = 'dadosTeste.csv'
+
     #Base de treinamento para treinar a IA, com menos dados que a base de testes para que ela não trabalhe decoradamente.
     def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
         csv_reader = csv.reader(utf8_data, dialect, **kwargs)
         for row in csv_reader:
             yield [unicode(cell, 'utf-8') for cell in row]
 
-    readerTreino = unicode_csv_reader(open('dadosTreino.csv'))
+    readerTreino = unicode_csv_reader(open(fileTreino))
     for field1, field2 in readerTreino:
         baseTreino.append((field1, field2))
 
-    readerTeste = unicode_csv_reader(open('dadosTeste.csv'))
+    readerTeste = unicode_csv_reader(open(fileTeste))
     for field1, field2 in readerTeste:
         baseTeste.append((field1, field2))
 
@@ -71,12 +80,11 @@ def retornaPrioridade(mensagem):
         if resultado != classe:
             erros.append((classe, resultado, frase))
 
-    teste = mensagem
     testeStemming = []
     stemmer = nltk.stem.RSLPStemmer()
-    for (palavrasTreino) in teste.split():
-     comStemmer = [p for p in palavrasTreino.split()]
-     testeStemming.append(str(stemmer.stem(comStemmer[0].decode('utf-8'))))
+    for (palavrasTreino) in mensagem.split():
+        comStemmer = [p for p in palavrasTreino.split()]
+        testeStemming.append(str(stemmer.stem(comStemmer[0].decode('utf-8'))))
 
     novo = extratorPalavras(testeStemming)
 

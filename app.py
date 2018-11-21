@@ -22,20 +22,49 @@ jsonFileReq = {
 
 app = Flask(__name__)
 
-def prioridadeMensagem(mensagem):
-    #Colocar aqui o código das priorities.py
-    #os.system("python priorities.py " + mensagem)
-    pass
-
 def addPrioritys(jsonData):
-    jsonData[0]["CategoryID"] = 11111
-    jsonData[0]["Priority"] = "Alta"
-
     for data in jsonData:
+        customers = 0
+        pontosPrioridade = 0
+
         for mensagem in data['Interactions']:
             if mensagem['Sender'] == "Customer":
+                customers += 1
                 # calcular a prioridade retornada para cada mensagem do json
-                print(priorities.retornaPrioridade(mensagem['Message']))
+                if priorities.retornaPrioridade(mensagem['Message']) == 'alta':
+                    pontosPrioridade += 0.25
+                else:
+                    pontosPrioridade -= 0.25
+
+                #print(mensagem["Subject"], priorities.retornaPrioridade(mensagem['Subject'], 'ASSUNTO'))
+                #if priorities.retornaPrioridade(mensagem['Subject'], 'ASSUNTO') == 'alta':
+                #    pontosPrioridade += 0.25
+                #else:
+                #    pontosPrioridade -= 0.25
+
+        # descobrir se é a primeira interação com o cliente
+        if customers > 1:
+            pontosPrioridade += 0.25
+        else:
+            pontosPrioridade -= 0.25
+
+        # verifica os meses de espera do cliente entre a primeira interação e a resposta
+        diasDiferenca = datetime.strptime(data['DateUpdate'], '%Y-%m-%d %H:%M:%S') - datetime.strptime(data['DateCreate'], '%Y-%m-%d %H:%M:%S')
+        qtdDias = diasDiferenca.days
+
+        while True:
+            if qtdDias >= 30:
+                pontosPrioridade += 0.25
+                qtdDias -= 30
+            else:
+                pontosPrioridade -= 0.25
+                break
+
+        #calcula a pontuação e define a prioridade
+        if pontosPrioridade >= 0.25:
+            data["Priority"] = "Alta"
+        else:
+            data["Priority"] = "Normal"
 
     with open("ticketsTestes.json", "w") as write_file:
         json.dump(jsonData, write_file, indent=2, sort_keys=True)
@@ -63,10 +92,16 @@ def home():
             dataFiltered = [dat for dat in dataFiltered if  dat.get("Priority") and dat["Priority"] == priority]
 
     if data.get('order'):
-        if data['order'].get('DateCreate') and data['order'].get('DateUpdate') and data['order'].get('Priority'):
-            dataFiltered = sorted(dataFiltered, key=lambda k: (datetime.strptime(k["DateCreate"], '%Y-%m-%d %H:%M:%S'), datetime.strptime(k["DateUpdate"], '%Y-%m-%d %H:%M:%S')))
+        if data['order'].get('DateCreate'):
+            dataFiltered = sorted(dataFiltered, key=lambda k: datetime.strptime(k["DateCreate"], '%Y-%m-%d %H:%M:%S'), reverse=False if data['order'].get('DateCreate') == 'ASC' else True)
+        elif data['order'].get('DateUpdate'):
+            dataFiltered = sorted(dataFiltered, key=lambda k: datetime.strptime(k["DateUpdate"], '%Y-%m-%d %H:%M:%S'), reverse=False if data['order'].get('DateUpdate') == 'ASC' else True)
+        elif data['order'].get('Priority'):
+            dataFiltered = sorted(dataFiltered, key=lambda k: k["Priority"], reverse=False if data['order'].get('Priority') == 'ASC' else True)
+
 
     return jsonify(dataFiltered), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
+    #debug=True
