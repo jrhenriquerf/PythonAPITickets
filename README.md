@@ -48,12 +48,12 @@ GET /
     },
     priority (string, optional): Prioridade entre "Alta" ou "Normal"
 },
-##### order: {
+##### order {
     Priority (string, optional): Ordenação do retorno por prioridade, pode ser em ASC ou DESC,
     DateCreate (string, optional): Ordenação do retorno por data de criação, pode ser em ASC ou DESC,,
     DateUpdate (string, optional): Ordenação do retorno por data de atualização, pode ser em ASC ou DESC
 }
-##### pagination: {
+##### pagination {
     limit (int, optional): Configura quantos tickets virão por página,
     page (int, optional): Configura qual página será retornada 
 }
