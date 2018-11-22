@@ -28,7 +28,7 @@ jsonReq = {
 
 app = Flask(__name__)
 
-def addPrioritys(jsonData):
+def addPriorities(jsonData):
     for data in jsonData:
         customers = 0
         pontosPrioridade = 0
@@ -73,7 +73,7 @@ def addPrioritys(jsonData):
 
 with open('ticketsTestes.json') as f:
     dataJson = json.load(f)
-    dataJson = addPrioritys(dataJson)
+    dataJson = addPriorities(dataJson)
 
 @app.route('/', methods=['GET'])
 def home():
