@@ -42,12 +42,6 @@ def addPrioritys(jsonData):
                 else:
                     pontosPrioridade -= 0.25
 
-                #print(mensagem["Subject"], priorities.retornaPrioridade(mensagem['Subject'], 'ASSUNTO'))
-                #if priorities.retornaPrioridade(mensagem['Subject'], 'ASSUNTO') == 'alta':
-                #    pontosPrioridade += 0.25
-                #else:
-                #    pontosPrioridade -= 0.25
-
         # descobrir se é a primeira interação com o cliente
         if customers > 1:
             pontosPrioridade += 0.25
@@ -150,5 +144,4 @@ def home():
     return jsonify(dataReturned), 200
 
 if __name__ == '__main__':
-    app.run()
-    #debug=True
+    app.run() #debug=True

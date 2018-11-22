@@ -54,6 +54,6 @@ GET /
     DateUpdate (string, optional): Ordenação do retorno por data de atualização, pode ser em ASC ou DESC
 }
 ##### pagination {
-    limit (int, optional): Configura quantos tickets virão por página,
-    page (int, optional): Configura qual página será retornada 
+    limit (int, optional): Configura quantos tickets virão por página, na ausência será colocado um limite de 10
+    page (int, optional): Configura qual página será retornada na ausência serão retornadas todas as páginas 
 }
