@@ -6,14 +6,9 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 def retornaPrioridade(mensagem):
-    #tipo='CORPO'
     baseTreino = []
     baseTeste = []
 
-    #if tipo == 'ASSUNTO':
-    #    fileTreino = 'dadosTreinoAssuntos.csv'
-    #    fileTeste = 'dadosTesteAssuntos.csv'
-    #else:
     fileTreino = 'dadosTreino.csv'
     fileTeste = 'dadosTeste.csv'
 

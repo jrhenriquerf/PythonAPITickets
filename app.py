@@ -4,21 +4,27 @@ import json
 import os
 import priorities
 from datetime import datetime
+from math import ceil
 
-jsonFileReq = {
+'''
+Exemplo de requisição GET para esta API:
+jsonReq = {
 	"filter": {
 		"date": {
-			"start": "2017-12-09 01:34:49",
+			"start": "2017-01-09 01:34:49",
 			"end": "2017-12-13 03:08:42"
 		},
 		"priority": "Alta"
 	},
 	"order": {
-		"DateCreate": "DESC",
-		"DateUpdate": "ASC",
-		"Priority": "DESC"
+		"Priority": "ASC",
+	},
+	"pagination": {
+		"limit": 20,
+		"page": 2
 	}
 }
+'''
 
 app = Flask(__name__)
 
@@ -77,15 +83,17 @@ with open('ticketsTestes.json') as f:
 
 @app.route('/', methods=['GET'])
 def home():
-    data = request.get_json()
-
     dataFiltered = dataJson
+    page = 1
+    limit = 10
+
+    data = request.get_json()
 
     if data.get('filter'):
         if data["filter"].get('date'):
             startDate = datetime.strptime(data["filter"]['date']["start"], '%Y-%m-%d %H:%M:%S')
             endDate = datetime.strptime(data["filter"]['date']["end"], '%Y-%m-%d %H:%M:%S')
-            
+
             dataFiltered = [dat for dat in dataFiltered if  startDate <= datetime.strptime(dat["DateCreate"], '%Y-%m-%d %H:%M:%S') <= endDate]
         if data["filter"].get('priority'):
             priority = data["filter"]["priority"]
@@ -99,8 +107,47 @@ def home():
         elif data['order'].get('Priority'):
             dataFiltered = sorted(dataFiltered, key=lambda k: k["Priority"], reverse=False if data['order'].get('Priority') == 'ASC' else True)
 
+    if data.get('pagination'):
+        if data['pagination'].get('page'):
+            page = data['pagination']['page']
+        if data['pagination'].get('limit'):
+            limit = data['pagination']['limit']
 
-    return jsonify(dataFiltered), 200
+    totalPages = len(dataFiltered) / float(limit)
+    totalResults = len(dataFiltered)
+
+    #Paginação
+    c = 1
+    i = 0
+    dataReturned = []
+    dataPage = []
+    newPage = page
+    for dt in dataFiltered:
+        if c > (limit * newPage) - limit and newPage <= page:
+            dataPage.append(dt)
+        if c == limit * newPage:
+            dataReturned.append({
+                'page': newPage,
+                'results': dataPage,
+                'limit': limit,
+                'totalPages': int(ceil(totalPages)),
+                'totalResults': totalResults
+            })
+            dataPage = []
+            newPage += 1
+            i += 1
+        c += 1
+
+    if len(dataPage) > 0:
+        dataReturned.append({
+            'page': page,
+            'results': dataPage,
+            'limit': limit,
+            'totalPages': int(ceil(totalPages)),
+            'totalResults': totalResults
+        })
+
+    return jsonify(dataReturned), 200
 
 if __name__ == '__main__':
     app.run()

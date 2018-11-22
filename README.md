@@ -35,3 +35,25 @@ Considere uma classificação com uma assertividade de no mínimo 70%, e guarde 
     
 ### Como entregar seu desafio
 - Faça um Fork desse projeto, desenvolva seu conteúdo e informe no formulário (https://goo.gl/forms/5wXTDLI6JwzzvOEg2) o link do seu repositório
+
+### Detalhes da API desenvolvida:
+GET / 
+- Retorna os tickets de serviço com as prioridades definidas, recebendo filtros por parâmetro e ordenando
+- Parâmetros:
+
+#####filter {
+    date (optional) {
+        start (date, optional): Data inicial no formato "Y-m-d h:i:s"
+        end: (date, optional): Data final no formato "Y-m-d h:i:s"
+    },
+    priority (string, optional): Prioridade entre "Alta" ou "Normal"
+},
+#####order: {
+    Priority (string, optional): Ordenação do retorno por prioridade, pode ser em ASC ou DESC,
+    DateCreate (string, optional): Ordenação do retorno por data de criação, pode ser em ASC ou DESC,,
+    DateUpdate (string, optional): Ordenação do retorno por data de atualização, pode ser em ASC ou DESC
+}
+#####pagination: {
+    limit (int, optional): Configura quantos tickets virão por página,
+    page (int, optional): Configura qual página será retornada 
+}
