@@ -39,6 +39,11 @@ Considere uma classificação com uma assertividade de no mínimo 70%, e guarde 
 ### Instruções para iniciar servidor local
 ![version](https://img.shields.io/badge/python-2.7.12-blue.svg?maxAge=2592000)
 
+##### Dependências
+Foi utilizada a biblioteca NLTK no projeto, então é necessário que faça o download da <b> model rslp </b> e da <b> coporea stopwords </b> do NLTK.
+Para realizar os downloads pode-se executar o arquivo downloads.py digitando no terminal na pasta do seu projeto: <br /> <br /> python downloads.py
+
+
 ##### Na pasta do projeto utilize o virtual env com o comando a seguir:
 source .venv/bin/activate
 ##### Após isso, execute o arquivo app.py:
