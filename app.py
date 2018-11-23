@@ -66,12 +66,12 @@ def addPriorities(jsonData):
         else:
             data["Priority"] = "Normal"
 
-    with open("ticketsTestes.json", "w") as write_file:
+    with open("tickets.json", "w") as write_file:
         json.dump(jsonData, write_file, indent=2, sort_keys=True)
     
     return jsonData
 
-with open('ticketsTestes.json') as f:
+with open('tickets.json') as f:
     dataJson = json.load(f)
     dataJson = addPriorities(dataJson)
 
