@@ -3,8 +3,9 @@ from imp import reload
 import nltk
 import sys
 import csv
-reload(sys)
-sys.setdefaultencoding("utf-8")
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 
 def retornaPrioridade(mensagem):
     baseTreino = []
