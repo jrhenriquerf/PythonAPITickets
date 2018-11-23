@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from imp import reload
 import nltk
 import sys
 import csv
