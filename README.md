@@ -37,6 +37,7 @@ Considere uma classificação com uma assertividade de no mínimo 70%, e guarde 
 - Faça um Fork desse projeto, desenvolva seu conteúdo e informe no formulário (https://goo.gl/forms/5wXTDLI6JwzzvOEg2) o link do seu repositório
 
 ### Instruções para iniciar servidor local
+![version](https://img.shields.io/badge/python-2.7.12-blue.svg?maxAge=2592000)
 #####Na pasta do projeto utilize o virtual env com o comando a seguir:
 source .venv/bin/activate
 #####Após isso, execute o arquivo app.py:
