@@ -36,6 +36,13 @@ Considere uma classificação com uma assertividade de no mínimo 70%, e guarde 
 ### Como entregar seu desafio
 - Faça um Fork desse projeto, desenvolva seu conteúdo e informe no formulário (https://goo.gl/forms/5wXTDLI6JwzzvOEg2) o link do seu repositório
 
+### Instruções para iniciar servidor local
+#####Na pasta do projeto utilize o virtual env com o comando a seguir:
+source .venv/bin/activate
+#####Após isso, execute o arquivo app.py:
+python app.py
+
+
 ### Detalhes da API desenvolvida:
 GET / 
 - Retorna os tickets de serviço com as prioridades definidas, recebendo filtros por parâmetro e ordenando
