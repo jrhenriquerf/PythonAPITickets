@@ -38,9 +38,10 @@ Considere uma classificação com uma assertividade de no mínimo 70%, e guarde 
 
 ### Instruções para iniciar servidor local
 ![version](https://img.shields.io/badge/python-2.7.12-blue.svg?maxAge=2592000)
-#####Na pasta do projeto utilize o virtual env com o comando a seguir:
+
+##### Na pasta do projeto utilize o virtual env com o comando a seguir:
 source .venv/bin/activate
-#####Após isso, execute o arquivo app.py:
+##### Após isso, execute o arquivo app.py:
 python app.py
 
 
